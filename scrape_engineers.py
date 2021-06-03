@@ -30,7 +30,7 @@ time.sleep(WAIT_TIME)
 # Extract and write data
 print("Extracting data...")
 posts = [post.text for post in driver.find_elements_by_class_name("posting")]
-with open(OUTPUT_PATH, "w+") as csvfile:
+with open(OUTPUT_PATH, "w+", encoding='utf-8') as csvfile:
 	fieldnames = ["name",
 				  "date",
 				  # "location",
@@ -54,9 +54,10 @@ with open(OUTPUT_PATH, "w+") as csvfile:
 	emailPattern = re.compile('(?<=Email: ).*?(?=\n)', re.MULTILINE)
 
 	for post in posts:
-		# Replace smart quotes, em dash, and é
+		# Replace smart quotes and em dash
 		# post = post.replace("‘", "'").replace("’", "'").replace("“", "\"").replace("”", "\"")
-		post = re.sub(u"[‘’]", "'", re.sub(u"[“”]", '"', post)).replace("—", "-").replace("√©", "e")
+		post = re.sub(u"[‘’]", "'",
+			   		re.sub(u"[“”]", '"', post)).replace("—", "-")
 
 		# Fix email obfuscation (note: being lazy on the delimiter matching, but shouldn't matter outside of extremely rare edge cases)
 		email = re.sub(r"\s+?(\.|[dD][oO0][tT])\s+?", ".", 
