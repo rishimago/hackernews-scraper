@@ -1,5 +1,5 @@
 # hackernews-scraper
-Scrapes emails from the list of people who want to be hired on HackerNews (https://seisvelas.github.io/hn-candidates-search/).
+Scrapes information from the list of people who want to be hired on HackerNews (https://seisvelas.github.io/hn-candidates-search/). Many of the people on this list have obfuscated their emails to make scraping more difficult. This script attempts to deobfuscate these emails but will occasionally fail, about 5% of the time. Additionally, many people do not format their postings in the requested format, resulting in an occasional failure to extract certain information. To mitigate this, each entry also contains the original post in full.
 
 Requires Selenium, Webdriver Manager, and Google Chrome:
 ```
